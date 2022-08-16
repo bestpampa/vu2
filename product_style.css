@@ -24,13 +24,13 @@
   }
   
   .product-image {
-    width: 80%;
+    width: 30%;
   }
   
   .product-image,
   .product-info {
     margin-top: 10px;
-    width: 50%;
+    width: 30%;
   }
   
   .color-box {
