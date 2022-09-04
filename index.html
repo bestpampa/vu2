@@ -1,45 +1,46 @@
+<div class="nav-bar"></div>
 
-<html>
-<head>
-    <title>Product App</title>
-    <link rel="stylesheet" type="text/css" href="product_style.css">
-</head>
-<body>
-    <div class="nav-bar"></div>
+<div id="app">
+  
+  <div class="product">
+        
+    <div class="product-image">
+      <img :src="image" />
+    </div>
 
-    <div id="app">
-        <div class="product">
-                
-            <div class="product-image">
-                <img v-bind:src="imagen" :alt="subproduct"/>
-            </div>
+    <div class="product-info">
+      <h1>{{ product }}</h1>
+      <p v-if="inStock">In Stock</p>
+      <p v-else>Out of Stock</p>
 
-            <div class="porduct-info">
-                <h1>{{ product }}</h1>
-                <p v-show="inStock">Hay Stock</p>                <span v-if="onSale">En SuperOferta!</span>
-                <h2>{{ subproduct }}</h2>
-                <p v-if="inventory > 10">Tenemos muchas</p>
-                <p v-else-if="inventory > 0 && inventory <= 10">Quedan pocas</p>
-                <p v-else>NO hay mas</p>
-                <h3>Detalles & Talles</h3>
-                <ul>
-                    <li v-for="detail in detalles"> {{ detail }}</li>
-                </ul>
-                <ul>
-                    <li v-for="size in talles"> {{ size }}</li>
-                </ul>
-                <div v-for="variant in variantes" :key="variant.variantId">
-                    <p>{{ variant.variantColor }}</p>
-                </div>
-                <a :href="url">Capacitate aqui</a>
-                <p>
-                    {{ description }}
-                </p>
-            </div>
+      <ul>
+        <li v-for="detail in details">{{ detail }}</li>
+      </ul>
+
+
+        <div class="color-box"
+             v-for="variant in variants" 
+             :key="variant.variantId"
+             :style="{ backgroundColor: variant.variantColor }"
+             @mouseover="updateProduct(variant.variantImage)"
+             >
+        </div> 
+
+        <button v-on:click="addToCart" 
+          :disabled="!inStock"
+          :class="{ disabledButton: !inStock }"
+          >
+        Add to cart
+        </button>
+
+        <div class="cart">
+          <p>Cart({{ cart }})</p>
         </div>
-    </div>    
-</body>
 
-<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-<script src="main.js"></script>
-</html>
+      </div> 
+    
+  </div>
+    
+</div> 
+
+ <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
